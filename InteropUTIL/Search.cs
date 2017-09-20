@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using static CSSQL.Marshal.Kernel32;
+using static Interop.Marshal.Kernel32;
 
-namespace CSSQL {
+namespace Interop {
 
     /// <summary>
     /// Work in progress, unfinished code

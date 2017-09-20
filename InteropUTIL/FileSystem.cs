@@ -1,9 +1,9 @@
-﻿using CSSQL.Marshal;
+﻿using Interop.Marshal;
 using System;
 using System.IO;
-using static CSSQL.Marshal.Kernel32;
+using static Interop.Marshal.Kernel32;
 
-namespace CSSQL.FileSystem {
+namespace Interop.FileSystem {
 
     public static class Utils {
 

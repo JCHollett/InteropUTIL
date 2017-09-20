@@ -1,11 +1,11 @@
-﻿using CSSQL.FileSystem;
+﻿using Interop.FileSystem;
 using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace CSSQL.Marshal {
+namespace Interop.Marshal {
 
     public static class Kernel32 {
 
