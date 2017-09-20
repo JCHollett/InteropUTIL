@@ -14,24 +14,6 @@ using static Interop.Marshal.Kernel32;
 
 namespace Interop {
 
-    public static class Ext {
-
-        public static IEnumerable<object> GetObjects<T>(this T d) where T : IDataRecord {
-            for (int i = 0; i <  d.FieldCount; ++i) {
-                yield return d.GetValue(i);
-            }
-        }
-    }
-
-    public class ARTOBJECT {
-        public string YEAR {
-            get; set;
-        }
-        public string DESCRIPTION {
-            get; set;
-        }
-    }
-
     public class Entry {
 
         public static IEnumerable<WIN32_FILE> Iterate(string dir) {
@@ -194,35 +176,11 @@ namespace Interop {
 
         public static void Main(string[] args) {
             using (var output = File.CreateText("Output.txt")) {
-                //foreach( var File in Iterate( @"F:\" ).Where( x => new[ ] { "tshock" , "terraria" }.Any( y => x.cFileName.ToLower().Contains( y ) ) ) ) {
-                string str = "workspace";
                 var search = new[] { "*.txt", "*.pdf", "*.cpp", "*.java" };
                 foreach (var File in Iterate(@"I:\").Where(x => search.Any(y => x.Extension.Equals(y)))) {
                     output.WriteLine(File.ftLastAccessTime + "::" + File.cAlternate);
                 }
             }
-        }
-
-        public static void Test() {
-            int files, folders;
-            long size = DeleteEmptySpace(@"X:\Downloads", out files, out folders);
-        }
-        /// <summary>
-        ///  >>= >=> <=> <=< >= <= !== === == =>> ==> => <<= <> ## /= &= |= *= 
-        /// </summary>
-        public static void Work() {
-            DeleteAll(@"X:\Downloads", x => x.cFileName.ToLower().Contains("sample"), 10);
-            MoveAll(@"X:\Downloads", @"X:\Media\Text", x => (new[] { ".txt", ".pdf", ".doc", ".ppt" }).Any(y => x.cFileName.Contains(y)), 3);
-            MoveAll(@"X:\Downloads", @"X:\Media\Executables", x => (new[] { ".exe", ".msi" }).Any(y => x.cFileName.Contains(y)), 3);
-            MoveAll(@"X:\Downloads", @"X:\Media\Jars", x => x.cFileName.Contains(".jar"), 3);
-            MoveAll(@"X:\Downloads", @"X:\Media\Images", x => (new[] { ".gif", ".png", ".jpeg", ".jpg", ".img" }).Any(y => x.cFileName.Contains(y)), 3);
-            MoveAll(@"X:\Downloads", @"X:\Media\Archives", x => (new[] { ".rar", ".zip", ".7z" }).Any(y => x.cFileName.Contains(y)), 3);
-            MoveAll(@"X:\Downloads", @"X:\Media\Source_Code", x => (new[] { ".java", ".py", ".cs" }).Any(y => x.cFileName.Contains(y)), 3);
-
-            DeleteAll(@"X:\Downloads", x => (new string[] { ".torrent", ".htm", ".php" }).Any(y => x.cFileName.Contains(y)), 0);
-            int files, folders;
-            long size = DeleteEmptySpace(@"X:\Downloads", out files, out folders);
-            Console.ReadKey();
         }
     }
 }
